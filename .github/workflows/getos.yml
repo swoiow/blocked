@@ -1,0 +1,26 @@
+name: GETOS
+
+concurrency:
+  group: ci-GETOS
+  cancel-in-progress: true
+
+on:
+  push:
+
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ windows-2016,windows-2019,windows-2022 ]
+
+
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.6
+
+      - name: get os
+        run: |
+          python -c "import platform;print(platform.platform(terse=True).lower())"
